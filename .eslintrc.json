@@ -1,0 +1,36 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  // all plugins (eslint-plugin-xxx) go here:
+  "plugins": [
+    "prettier",
+    "@typescript-eslint"
+    // "@next/eslint-plugin-next"
+  ],
+  // all configs (eslint-config-xxx) go here:
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    // ... rules which you'd like to disable
+  }
+}
