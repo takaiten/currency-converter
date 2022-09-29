@@ -19,18 +19,14 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  // all plugins (eslint-plugin-xxx) go here:
   "plugins": [
     "prettier",
     "@typescript-eslint"
-    // "@next/eslint-plugin-next"
   ],
-  // all configs (eslint-config-xxx) go here:
   "extends": [
     "next/core-web-vitals",
     "plugin:prettier/recommended"
   ],
   "rules": {
-    // ... rules which you'd like to disable
   }
 }
