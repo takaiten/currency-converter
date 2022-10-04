@@ -1,11 +1,28 @@
-import type { Theme } from 'theme-ui';
+import { merge } from 'theme-ui';
 import { deep } from '@theme-ui/presets';
 
-const theme: Theme = {
-  ...deep,
+export default merge(deep, {
   styles: {
-    ...deep.styles,
+    spinner: {
+      color: 'purple',
+    },
   },
-};
-
-export default theme;
+  forms: {
+    input: {
+      fontSize: '1.25em',
+      height: 64,
+    },
+    select: {
+      fontSize: '1.25em',
+      height: 64,
+    },
+  },
+  layout: {
+    header: {
+      backgroundColor: 'highlight',
+    },
+    footer: {
+      backgroundColor: 'highlight',
+    },
+  },
+});

@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 import { memo, useCallback } from 'react';
 import { Divider, Grid } from 'theme-ui';
 
@@ -46,7 +47,7 @@ export const Converter = memo(() => {
         onCurrencyChange={handleBaseCurrencyChange}
         loading={loading}
       />
-      <Divider />
+      <div sx={{ py: 5 }} />
       <Unit
         amount={converted.amount}
         currency={converted.currency}
