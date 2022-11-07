@@ -7,6 +7,12 @@ export default merge(deep, {
       color: 'purple',
     },
   },
+  buttons: {
+    amount: {
+      color: 'background',
+      bg: 'secondary',
+    },
+  },
   forms: {
     input: {
       fontSize: '1.25em',

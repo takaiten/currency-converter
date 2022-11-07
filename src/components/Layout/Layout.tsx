@@ -1,11 +1,11 @@
 /** @jsxImportSource theme-ui */
-import { memo, ReactNode } from 'react';
-import { Divider } from 'theme-ui';
+import { memo } from 'react';
 
 import { Footer } from './Footer';
 import { Header } from './Header';
+import { Main } from './Main';
 
-export const Layout = memo<{ children: ReactNode }>(({ children }) => {
+export const Layout = memo<{ children: React.ReactNode }>(({ children }) => {
   return (
     <div
       sx={{
@@ -16,27 +16,7 @@ export const Layout = memo<{ children: ReactNode }>(({ children }) => {
       }}
     >
       <Header />
-      <main
-        sx={{
-          width: '100%',
-          flex: '1 1 auto',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          variant: 'layout.main',
-        }}
-      >
-        <div
-          sx={{
-            width: '100%',
-            maxWidth: 768,
-            px: 3,
-            variant: 'layout.container',
-          }}
-        >
-          {children}
-        </div>
-      </main>
+      <Main>{children}</Main>
       <Footer />
     </div>
   );

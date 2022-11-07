@@ -11,6 +11,7 @@ import {
 } from '~/app/slice';
 
 import { Unit } from './Unit';
+import { AmountControls } from './AmountControls';
 
 export const Converter = memo(() => {
   const dispatch = useAppDispatch();
@@ -46,6 +47,10 @@ export const Converter = memo(() => {
         onAmountChange={handleBaseAmountChange}
         onCurrencyChange={handleBaseCurrencyChange}
         loading={loading}
+      />
+      <AmountControls
+        amounts={[1, 100, 500, 1000, 2500, 5000]}
+        onAmountSelect={handleBaseAmountChange}
       />
       <div sx={{ py: 5 }} />
       <Unit
