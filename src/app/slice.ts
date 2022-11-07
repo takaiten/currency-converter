@@ -2,7 +2,9 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import type { CurrencyCode, ExchangeRate } from '~/interfaces';
 import type { AppState, AppThunk } from './store';
+
 import { fetchExchangeRates } from './exchangeAPI';
+import { round } from '~/helpers';
 
 export interface ConverterState {
   exchange: {
@@ -52,7 +54,7 @@ const getBaseToConvertedRate = ({ exchange, rates }: ConverterState): number => 
 };
 
 const recalculateAmount = (state: ConverterState) => {
-  return state.exchange.base.amount * getBaseToConvertedRate(state);
+  return round(state.exchange.base.amount * getBaseToConvertedRate(state), 3);
 };
 
 export const converterSlice = createSlice({
@@ -71,6 +73,11 @@ export const converterSlice = createSlice({
       state.exchange.converted.currency = currency as CurrencyCode;
       state.exchange.converted.amount = recalculateAmount(state);
     },
+    switchAround: (state) => {
+      const temp = state.exchange.base;
+      state.exchange.base = state.exchange.converted;
+      state.exchange.converted = temp;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -87,7 +94,7 @@ export const converterSlice = createSlice({
   },
 });
 
-export const { updateBaseAmount, updateBaseCurrency, updateConvertedCurrency } =
+export const { updateBaseAmount, updateBaseCurrency, updateConvertedCurrency, switchAround } =
   converterSlice.actions;
 
 export const selectConverterState = (state: AppState) => state.converter;
@@ -99,5 +106,11 @@ export const fetchAndUpdateBaseCurrency =
     await dispatch(getExchangeRates(currency));
     dispatch(updateBaseCurrency(currency as CurrencyCode));
   };
+
+export const switchAndFetchCurrency = (): AppThunk => async (dispatch, getState) => {
+  const { converted } = getState().converter.exchange;
+  await dispatch(getExchangeRates(converted.currency));
+  dispatch(switchAround());
+};
 
 export default converterSlice.reducer;

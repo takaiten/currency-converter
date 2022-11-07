@@ -10,6 +10,7 @@ export const AmountControls = memo<AmountControlsProps>(({ amounts, onAmountSele
   const handleAmountClick = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
       const { amount } = (event.target as any).dataset || {};
+      if (!amount) return;
       onAmountSelect(amount);
     },
     [onAmountSelect],

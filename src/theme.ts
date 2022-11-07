@@ -12,6 +12,19 @@ export default merge(deep, {
       color: 'background',
       bg: 'secondary',
     },
+    bigIcon: {
+      fontSize: 72,
+      '&:hover': {
+        opacity: 0.9,
+      },
+      '&:active': {
+        transform: 'translateY(5px)',
+        opacity: 0.6,
+      },
+      '&:disabled': {
+        filter: 'blur(3px) sepia(40%)',
+      },
+    },
   },
   forms: {
     input: {

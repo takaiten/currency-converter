@@ -1,11 +1,12 @@
 /** @jsxImportSource theme-ui */
 import { memo, useCallback } from 'react';
-import { Divider, Grid } from 'theme-ui';
+import { Grid, IconButton, Text } from 'theme-ui';
 
 import { useAppDispatch, useAppSelector } from '~/hooks/useTypedRedux';
 import {
   fetchAndUpdateBaseCurrency,
   selectIsDataLoading,
+  switchAndFetchCurrency,
   updateBaseAmount,
   updateConvertedCurrency,
 } from '~/app/slice';
@@ -15,7 +16,8 @@ import { AmountControls } from './AmountControls';
 
 export const Converter = memo(() => {
   const dispatch = useAppDispatch();
-  const { base, converted } = useAppSelector((state) => state.converter.exchange);
+  const { exchange, rates } = useAppSelector((state) => state.converter);
+  const { base, converted } = exchange;
   const loading = useAppSelector(selectIsDataLoading);
 
   const handleBaseCurrencyChange = useCallback(
@@ -39,6 +41,10 @@ export const Converter = memo(() => {
     [dispatch],
   );
 
+  const handleSwitch = useCallback(() => {
+    dispatch(switchAndFetchCurrency());
+  }, [dispatch]);
+
   return (
     <Grid gap={2} sx={{ height: '100%' }}>
       <Unit
@@ -52,12 +58,19 @@ export const Converter = memo(() => {
         amounts={[1, 100, 500, 1000, 2500, 5000]}
         onAmountSelect={handleBaseAmountChange}
       />
-      <div sx={{ py: 5 }} />
+      <div sx={{ py: 5, margin: '0 auto' }}>
+        <IconButton variant="bigIcon" disabled={loading} onClick={handleSwitch}>
+          🔄
+        </IconButton>
+      </div>
       <Unit
         amount={converted.amount}
         currency={converted.currency}
         onCurrencyChange={handleConvertedCurrencyChange}
       />
+      <Text>
+        {`1 ${base.currency} = ${rates[base.currency][converted.currency]} ${converted.currency}`}
+      </Text>
     </Grid>
   );
 });
