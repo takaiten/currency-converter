@@ -73,7 +73,10 @@ export const converterSlice = createSlice({
       state.exchange.converted.currency = currency as CurrencyCode;
       state.exchange.converted.amount = recalculateAmount(state);
     },
-    switchAround: (state) => {
+    recalculate: (state) => {
+      state.exchange.converted.amount = recalculateAmount(state);
+    },
+    swapCurrencies: (state) => {
       const temp = state.exchange.base;
       state.exchange.base = state.exchange.converted;
       state.exchange.converted = temp;
@@ -94,12 +97,19 @@ export const converterSlice = createSlice({
   },
 });
 
-export const { updateBaseAmount, updateBaseCurrency, updateConvertedCurrency, switchAround } =
-  converterSlice.actions;
+export const {
+  updateBaseAmount,
+  updateBaseCurrency,
+  updateConvertedCurrency,
+  swapCurrencies,
+  recalculate,
+} = converterSlice.actions;
 
+// Selectors
 export const selectConverterState = (state: AppState) => state.converter;
 export const selectIsDataLoading = (state: AppState) => state.converter.status === 'loading';
 
+// Thunks
 export const fetchAndUpdateBaseCurrency =
   (currency: string): AppThunk =>
   async (dispatch) => {
@@ -110,7 +120,13 @@ export const fetchAndUpdateBaseCurrency =
 export const switchAndFetchCurrency = (): AppThunk => async (dispatch, getState) => {
   const { converted } = getState().converter.exchange;
   await dispatch(getExchangeRates(converted.currency));
-  dispatch(switchAround());
+  dispatch(swapCurrencies());
+};
+
+export const fetchCurrentCurrencyRates = (): AppThunk => async (dispatch, getState) => {
+  const { base } = getState().converter.exchange;
+  await dispatch(getExchangeRates(base.currency));
+  dispatch(recalculate());
 };
 
 export default converterSlice.reducer;

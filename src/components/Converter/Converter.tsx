@@ -5,6 +5,7 @@ import { Grid, IconButton, Text } from 'theme-ui';
 import { useAppDispatch, useAppSelector } from '~/hooks/useTypedRedux';
 import {
   fetchAndUpdateBaseCurrency,
+  fetchCurrentCurrencyRates,
   selectIsDataLoading,
   switchAndFetchCurrency,
   updateBaseAmount,
@@ -45,6 +46,10 @@ export const Converter = memo(() => {
     dispatch(switchAndFetchCurrency());
   }, [dispatch]);
 
+  const handleUpdate = useCallback(() => {
+    dispatch(fetchCurrentCurrencyRates());
+  }, [dispatch]);
+
   return (
     <Grid gap={2} sx={{ height: '100%' }}>
       <Unit
@@ -59,7 +64,10 @@ export const Converter = memo(() => {
         onAmountSelect={handleBaseAmountChange}
       />
       <div sx={{ py: 5, margin: '0 auto' }}>
-        <IconButton variant="bigIcon" disabled={loading} onClick={handleSwitch}>
+        <IconButton variant="bigIcon" title="swap" disabled={loading} onClick={handleSwitch}>
+          🔃
+        </IconButton>
+        <IconButton variant="bigIcon" title="update" disabled={loading} onClick={handleUpdate}>
           🔄
         </IconButton>
       </div>

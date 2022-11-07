@@ -13,6 +13,8 @@ export default merge(deep, {
       bg: 'secondary',
     },
     bigIcon: {
+      width: 'auto',
+      height: 'auto',
       fontSize: 72,
       '&:hover': {
         opacity: 0.9,
