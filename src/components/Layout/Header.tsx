@@ -15,14 +15,13 @@ export const Header = memo(() => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: '80px',
         width: '100%',
-        px: 4,
         py: 3,
+        px: 2,
       }}
     >
       <Heading sx={{ p: 0 }}>Currency Converter</Heading>
-      {loading && <Spinner variant="styles.spinner" size={48} strokeWidth={5} />}
+      {loading && <Spinner variant="styles.spinner" size={30} strokeWidth={4} />}
     </header>
   );
 });

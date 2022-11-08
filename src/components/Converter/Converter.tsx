@@ -64,10 +64,10 @@ export const Converter = memo(() => {
         onAmountSelect={handleBaseAmountChange}
       />
       <div sx={{ py: 5, margin: '0 auto' }}>
-        <IconButton variant="bigIcon" title="swap" disabled={loading} onClick={handleSwitch}>
+        <IconButton variant="big" title="swap" disabled={loading} onClick={handleSwitch}>
           🔃
         </IconButton>
-        <IconButton variant="bigIcon" title="update" disabled={loading} onClick={handleUpdate}>
+        <IconButton variant="big" title="update" disabled={loading} onClick={handleUpdate}>
           🔄
         </IconButton>
       </div>

@@ -1,6 +1,7 @@
 /** @jsxImportSource theme-ui */
 import { memo } from 'react';
 
+import { Settings } from './Settings';
 import { Footer } from './Footer';
 import { Header } from './Header';
 import { Main } from './Main';
@@ -17,6 +18,7 @@ export const Layout = memo<{ children: React.ReactNode }>(({ children }) => {
     >
       <Header />
       <Main>{children}</Main>
+      <Settings />
       <Footer />
     </div>
   );

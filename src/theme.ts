@@ -6,21 +6,31 @@ export default merge(deep, {
     spinner: {
       color: 'purple',
     },
+    divider: {
+      margin: 0,
+    },
   },
   buttons: {
     amount: {
       color: 'background',
       bg: 'secondary',
     },
-    bigIcon: {
+    withDropShadow: {
+      transition: 'filter 0.5s',
+      filter: 'drop-shadow(-2px 2px 10px black)',
+      '&:active': {
+        filter: 'drop-shadow(0 0)',
+      },
+    },
+    big: {
       width: 'auto',
       height: 'auto',
-      fontSize: 72,
+      fontSize: '4rem',
       '&:hover': {
         opacity: 0.9,
       },
       '&:active': {
-        transform: 'translateY(5px)',
+        // transform: 'translateY(2px)',
         opacity: 0.6,
       },
       '&:disabled': {
@@ -40,10 +50,13 @@ export default merge(deep, {
   },
   layout: {
     header: {
-      backgroundColor: 'highlight',
+      bg: 'highlight',
     },
     footer: {
-      backgroundColor: 'highlight',
+      bg: 'highlight',
+    },
+    settings: {
+      bg: 'highlight',
     },
   },
 });
