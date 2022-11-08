@@ -1,10 +1,12 @@
 import { merge } from 'theme-ui';
-import { deep } from '@theme-ui/presets';
+import { roboto } from '@theme-ui/presets';
 
-export default merge(deep, {
+// console.log(roboto);
+
+export default merge(roboto, {
   styles: {
     spinner: {
-      color: 'purple',
+      color: 'muted',
     },
     divider: {
       margin: 0,
@@ -12,8 +14,8 @@ export default merge(deep, {
   },
   buttons: {
     amount: {
-      color: 'background',
-      bg: 'secondary',
+      fontWeight: 'bold',
+      px: 0,
     },
     withDropShadow: {
       transition: 'filter 0.5s',
@@ -46,17 +48,20 @@ export default merge(deep, {
     select: {
       fontSize: '1.25em',
       height: 64,
+      bg: 'muted',
     },
   },
   layout: {
     header: {
-      bg: 'highlight',
+      color: 'muted',
+      bg: 'primary',
     },
-    footer: {
-      bg: 'highlight',
+    main: {
+      backgroundColor: 'muted',
     },
     settings: {
-      bg: 'highlight',
+      bg: 'primary',
+      color: 'muted',
     },
   },
 });

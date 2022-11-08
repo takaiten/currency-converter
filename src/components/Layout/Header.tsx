@@ -16,12 +16,11 @@ export const Header = memo(() => {
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '100%',
-        py: 3,
         px: 2,
       }}
     >
-      <Heading sx={{ p: 0 }}>Currency Converter</Heading>
-      {loading && <Spinner variant="styles.spinner" size={30} strokeWidth={4} />}
+      <Heading sx={{ py: 3 }}>Currency Converter</Heading>
+      {loading && <Spinner variant="styles.spinner" size={32} strokeWidth={4} />}
     </header>
   );
 });

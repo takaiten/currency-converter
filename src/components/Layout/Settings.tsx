@@ -10,19 +10,18 @@ export const Settings = memo(() => {
   return (
     <div
       sx={{
-        variant: 'layout.settings',
         width: '100%',
       }}
     >
       <div
         sx={{
+          variant: 'layout.settings',
           transition: '0.333s',
-          height: open ? '75vh' : '56px',
+          height: open ? '75vh' : '54px',
           position: 'absolute',
           bottom: 0,
           left: 0,
           right: 0,
-          bg: 'gray',
         }}
       >
         <Heading as="h3" sx={{ px: 2, py: 3 }}>
@@ -31,6 +30,7 @@ export const Settings = memo(() => {
         <hr sx={{ variant: 'styles.divider' }} />
         <div
           sx={{
+            variant: 'layout.settings',
             position: 'absolute',
             top: -32,
             right: 0,
@@ -40,7 +40,6 @@ export const Settings = memo(() => {
             borderRadius: '50%',
             borderBottomLeftRadius: 0,
             borderBottomRightRadius: 0,
-            bg: 'gray',
             display: 'inline-flex',
             justifyContent: 'center',
             alignItems: 'center',
