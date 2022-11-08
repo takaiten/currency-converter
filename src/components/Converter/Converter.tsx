@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '~/hooks/useTypedRedux';
 import {
   fetchAndUpdateBaseCurrency,
   fetchCurrentCurrencyRates,
+  selectCurrentExchangeRate,
   selectIsDataLoading,
   switchAndFetchCurrency,
   updateBaseAmount,
@@ -19,8 +20,10 @@ import { AmountControls } from './AmountControls';
 export const Converter = memo(() => {
   const dispatch = useAppDispatch();
   const { exchange, rates } = useAppSelector((state) => state.converter);
-  const { base, converted } = exchange;
+  const rate = useAppSelector(selectCurrentExchangeRate);
   const loading = useAppSelector(selectIsDataLoading);
+
+  const { base, converted } = exchange;
 
   const handleBaseCurrencyChange = useCallback(
     (currency: string) => {
@@ -79,9 +82,7 @@ export const Converter = memo(() => {
         currency={converted.currency}
         onCurrencyChange={handleConvertedCurrencyChange}
       />
-      <Text>
-        {`1 ${base.currency} = ${rates[base.currency][converted.currency]} ${converted.currency}`}
-      </Text>
+      <Text>{`1 ${base.currency} = ${rate} ${converted.currency}`}</Text>
     </Grid>
   );
 });

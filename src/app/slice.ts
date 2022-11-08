@@ -18,7 +18,8 @@ export interface ConverterState {
     };
   };
   rates: Partial<Record<CurrencyCode, Partial<Record<CurrencyCode, number>>>>;
-  override: Partial<Record<CurrencyCode, ExchangeRate>>;
+  override: Partial<Record<CurrencyCode, Partial<Record<CurrencyCode, number>>>>;
+  overrideEnabled: boolean;
   status: 'idle' | 'loading' | 'failed';
 }
 
@@ -39,6 +40,7 @@ const initialState: ConverterState = {
     },
   },
   override: {},
+  overrideEnabled: false,
   status: 'idle',
 };
 
@@ -49,12 +51,24 @@ export const getExchangeRates = createAsyncThunk(
   },
 );
 
-const getBaseToConvertedRate = ({ exchange, rates }: ConverterState): number => {
-  return rates[exchange.base.currency]?.[exchange.converted.currency] || 0;
+const getBaseConversionRate = (rates, base, converted): number => {
+  return rates[base]?.[converted] || 0;
+};
+
+const getConversionRate = ({
+  exchange,
+  override,
+  rates,
+  overrideEnabled: overrideEnable,
+}: ConverterState): number => {
+  const { base, converted } = exchange;
+  const originalRate = getBaseConversionRate(rates, base.currency, converted.currency);
+  const overrideRate = getBaseConversionRate(override, base.currency, converted.currency);
+  return overrideEnable ? overrideRate || originalRate : originalRate;
 };
 
 const recalculateAmount = (state: ConverterState) => {
-  return round(state.exchange.base.amount * getBaseToConvertedRate(state), 3);
+  return round(state.exchange.base.amount * getConversionRate(state), 3);
 };
 
 export const converterSlice = createSlice({
@@ -81,6 +95,17 @@ export const converterSlice = createSlice({
       state.exchange.base = state.exchange.converted;
       state.exchange.converted = temp;
     },
+    toggleCurrencyRateOverride: (state) => {
+      state.overrideEnabled = !state.overrideEnabled;
+      state.exchange.converted.amount = recalculateAmount(state);
+    },
+    updateCurrencyRateOverride: (state, { payload: rate }: PayloadAction<string>) => {
+      const { base, converted } = state.exchange;
+      if (!state.override[base.currency]) {
+        state.override[base.currency] = {};
+      }
+      state.override[base.currency][converted.currency] = +rate;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -103,11 +128,14 @@ export const {
   updateConvertedCurrency,
   swapCurrencies,
   recalculate,
+  toggleCurrencyRateOverride,
+  updateCurrencyRateOverride,
 } = converterSlice.actions;
 
 // Selectors
 export const selectConverterState = (state: AppState) => state.converter;
 export const selectIsDataLoading = (state: AppState) => state.converter.status === 'loading';
+export const selectCurrentExchangeRate = (state: AppState) => getConversionRate(state.converter);
 
 // Thunks
 export const fetchAndUpdateBaseCurrency =

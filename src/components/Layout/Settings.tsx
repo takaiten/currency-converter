@@ -20,8 +20,8 @@ export const Settings = memo(() => {
       <div
         sx={{
           variant: 'layout.settings',
-          transition: '0.333s',
-          height: open ? '75vh' : '0px',
+          transition: '1s',
+          height: open ? 'initial' : '0px',
           position: 'absolute',
           bottom: 0,
           left: 0,
@@ -40,7 +40,7 @@ export const Settings = memo(() => {
             variant: 'layout.settings',
             zIndex: -1,
             position: 'absolute',
-            top: -80,
+            top: -72,
             right: 0,
             left: 'auto',
             width: 80,
