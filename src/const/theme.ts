@@ -1,32 +1,20 @@
 import { merge } from 'theme-ui';
 import { roboto } from '@theme-ui/presets';
 
-const colors = {
-  flame: {
-    text: '#252422',
-    background: '#fffcf2',
+export default merge(roboto, {
+  colors: {
+    text: '#fffcf2',
+    background: '#252422',
     primary: '#eb5e28',
     secondary: '#403d39',
     muted: '#ccc5b9',
   },
-  liver: {
-    text: '#283d3b',
-    background: '#fffcf2',
-    primary: '#772e25',
-    secondary: '#c44536',
-    accent: '#197278',
-    muted: '#edddd4',
-    disabled: '#c2c2c2',
-  },
-};
-
-export default merge(roboto, {
-  colors: colors.liver,
   styles: {
     spinner: {
       color: 'muted',
     },
     divider: {
+      borderColor: 'muted',
       margin: 0,
     },
   },
@@ -57,6 +45,7 @@ export default merge(roboto, {
       },
     },
     icon: {
+      color: 'text',
       '& svg': {
         width: '100%',
         height: '100%',
@@ -77,15 +66,12 @@ export default merge(roboto, {
     select: {
       fontSize: '1.25em',
       height: 56,
-      bg: 'muted',
+      background: 'none',
     },
   },
   layout: {
-    root: {
-      height: '100vh',
-    },
     header: {
-      color: 'white',
+      color: 'primary',
       bg: 'secondary',
     },
     main: {
@@ -97,7 +83,6 @@ export default merge(roboto, {
     },
     settings: {
       color: 'muted',
-      bg: 'accent',
     },
   },
 });

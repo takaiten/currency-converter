@@ -27,13 +27,19 @@ export const Unit = memo<IUnit>(
     return (
       <div sx={{ display: 'flex', flexDirection: 'row' }}>
         <Input
+          sx={{ color: 'background' }}
           type="number"
           disabled={loading}
           value={amount}
           onChange={handleAmountChange}
           readOnly={!onAmountChange}
         />
-        <CurrencySelect disabled={loading} value={currency} onChange={handleCurrencyChange} />
+        <CurrencySelect
+          sx={{ color: 'background' }}
+          disabled={loading}
+          value={currency}
+          onChange={handleCurrencyChange}
+        />
       </div>
     );
   },

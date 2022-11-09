@@ -13,7 +13,7 @@ export const Settings = memo(() => {
       sx={{
         variant: 'layout.settings',
         transition: 'height 0.33s ease',
-        height: open ? '225px' : '0px',
+        height: open ? '200px' : '0px',
         overflow: 'hidden',
       }}
     >

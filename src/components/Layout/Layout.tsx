@@ -10,6 +10,7 @@ export const Layout = memo<{ children: React.ReactNode }>(({ children }) => {
   return (
     <div
       sx={{
+        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         variant: 'layout.root',

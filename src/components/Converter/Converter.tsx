@@ -69,7 +69,7 @@ export const Converter = memo(() => {
       />
       <Flex
         sx={{
-          py: 5,
+          py: 4,
           alignItems: 'center',
           justifyContent: 'center',
           '& svg': { height: 48, width: 48 },
@@ -94,7 +94,9 @@ export const Converter = memo(() => {
         currency={converted.currency}
         onCurrencyChange={handleConvertedCurrencyChange}
       />
-      <Text>{`1 ${base.currency} = ${rate} ${converted.currency}`}</Text>
+      <Text
+        sx={{ color: 'background' }}
+      >{`1 ${base.currency} = ${rate} ${converted.currency}`}</Text>
     </Grid>
   );
 });
