@@ -1,12 +1,18 @@
 /** @jsxImportSource theme-ui */
-import { memo } from 'react';
-import { Divider, Heading, Spinner } from 'theme-ui';
+import { memo, useCallback } from 'react';
+import { IconButton, Heading } from 'theme-ui';
 
-import { selectIsDataLoading } from '~/app/slice';
-import { useAppSelector } from '~/hooks';
+import { Settings as SettingsIcon } from 'emotion-icons/material';
+
+import { toggleSettingsDisplay } from '~/app/slice';
+import { useAppDispatch } from '~/hooks';
 
 export const Header = memo(() => {
-  const loading = useAppSelector(selectIsDataLoading);
+  const dispatch = useAppDispatch();
+
+  const toggleSettings = useCallback(() => {
+    dispatch(toggleSettingsDisplay());
+  }, [dispatch]);
 
   return (
     <header
@@ -20,7 +26,9 @@ export const Header = memo(() => {
       }}
     >
       <Heading sx={{ py: 3 }}>Currency Converter</Heading>
-      {loading && <Spinner variant="styles.spinner" size={32} strokeWidth={4} />}
+      <IconButton sx={{ height: 48, width: 48 }} onClick={toggleSettings}>
+        <SettingsIcon />
+      </IconButton>
     </header>
   );
 });

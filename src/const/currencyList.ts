@@ -164,3 +164,7 @@ export const CURRENCY_LIST = {
   YER: { code: 'YER', name: 'Yemeni Rial', symbol: '﷼' },
   ZMK: { code: 'ZMK', name: 'Zambian Kwacha', symbol: 'ZK' },
 };
+
+export const CURRENCY_CODES = Object.keys(
+  CURRENCY_LIST,
+).sort() as unknown as (keyof typeof CURRENCY_LIST)[];

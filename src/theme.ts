@@ -81,9 +81,12 @@ export default merge(roboto, {
     },
   },
   layout: {
+    root: {
+      height: '100vh',
+    },
     header: {
       color: 'white',
-      bg: 'primary',
+      bg: 'secondary',
     },
     main: {
       bg: 'muted',

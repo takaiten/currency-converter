@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { CurrencyCode, ExchangeRate } from '~/interfaces';
+import type { CurrencyCode } from '~/interfaces';
 import type { AppState, AppThunk } from './store';
 
 import { fetchExchangeRates } from './exchangeAPI';
@@ -16,6 +16,9 @@ export interface ConverterState {
       currency: CurrencyCode;
       amount: number;
     };
+  };
+  settings: {
+    open: boolean;
   };
   rates: Partial<Record<CurrencyCode, Partial<Record<CurrencyCode, number>>>>;
   override: Partial<Record<CurrencyCode, Partial<Record<CurrencyCode, number>>>>;
@@ -38,6 +41,9 @@ const initialState: ConverterState = {
     USD: {
       RUB: 58,
     },
+  },
+  settings: {
+    open: false,
   },
   override: {},
   overrideEnabled: false,
@@ -106,6 +112,9 @@ export const converterSlice = createSlice({
       }
       state.override[base.currency][converted.currency] = +rate;
     },
+    toggleSettingsDisplay: (state) => {
+      state.settings.open = !state.settings.open;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -130,6 +139,7 @@ export const {
   recalculate,
   toggleCurrencyRateOverride,
   updateCurrencyRateOverride,
+  toggleSettingsDisplay,
 } = converterSlice.actions;
 
 // Selectors

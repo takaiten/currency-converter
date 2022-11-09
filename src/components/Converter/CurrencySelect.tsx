@@ -1,20 +1,20 @@
-import { useMemo } from 'react';
 import { Box, Select, SelectProps } from 'theme-ui';
 
-import { CURRENCY_LIST } from '~/const/currencyList';
-import { CurrencyData, CurrencyCode } from '~/interfaces/ICurrency';
+import type { CurrencyCode } from '~/interfaces/ICurrency';
+import { CURRENCY_CODES } from '~/const/currencyList';
 
 interface CurrencySelectProps {
-  currencies?: Record<CurrencyCode, CurrencyData>;
+  currencyCodes?: CurrencyCode[];
 }
 
-export const CurrencySelect = ({ currencies, ...props }: CurrencySelectProps & SelectProps) => {
-  const options = useMemo(() => Object.keys(currencies ?? CURRENCY_LIST), []);
-
+export const CurrencySelect = ({
+  currencyCodes = CURRENCY_CODES,
+  ...props
+}: CurrencySelectProps & SelectProps) => {
   return (
     <Box sx={{ minWidth: 'fit-content' }}>
       <Select {...props}>
-        {options.map((code) => (
+        {currencyCodes.map((code) => (
           <option key={code}>{code}</option>
         ))}
       </Select>

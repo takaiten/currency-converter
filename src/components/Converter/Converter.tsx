@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 import { memo, useCallback } from 'react';
-import { Button, Grid, Text } from 'theme-ui';
+import { Button, Flex, Grid, Spinner, Text } from 'theme-ui';
 import { SwapVert, Refresh } from 'emotion-icons/material';
 
 import { useAppDispatch, useAppSelector } from '~/hooks/useTypedRedux';
@@ -67,16 +67,28 @@ export const Converter = memo(() => {
         amounts={[1, 100, 500, 1000, 2500, 5000]}
         onAmountSelect={handleBaseAmountChange}
       />
-      <Grid columns={2} sx={{ py: 5, margin: '0 auto', '& svg': { height: 48, width: 48 } }}>
+      <Flex
+        sx={{
+          py: 5,
+          alignItems: 'center',
+          justifyContent: 'center',
+          '& svg': { height: 48, width: 48 },
+        }}
+      >
         <Button title="swap" disabled={loading} onClick={handleSwitch}>
           <SwapVert />
           <Text>SWITCH</Text>
         </Button>
+        <Spinner
+          sx={{ visibility: loading ? 'initial' : 'hidden', mx: 5 }}
+          size={48}
+          strokeWidth={4}
+        />
         <Button title="update" disabled={loading} onClick={handleUpdate}>
           <Refresh />
           <Text>REFRESH</Text>
         </Button>
-      </Grid>
+      </Flex>
       <Unit
         amount={converted.amount}
         currency={converted.currency}

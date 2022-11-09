@@ -10,15 +10,14 @@ export const Layout = memo<{ children: React.ReactNode }>(({ children }) => {
   return (
     <div
       sx={{
-        minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         variant: 'layout.root',
       }}
     >
       <Header />
-      <Main>{children}</Main>
       <Settings />
+      <Main>{children}</Main>
       <Footer />
     </div>
   );
