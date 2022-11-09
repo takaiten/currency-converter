@@ -1,10 +1,14 @@
+/**
+ * For sake of simplicity on this project everything related to the redux store is defined in this slice file.
+ * In real life project it's best to use 'duck' or 'modules' folder structure
+ */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import type { CurrencyCode } from '~/interfaces';
 import type { AppState, AppThunk } from './store';
 
-import { fetchExchangeRates } from './exchangeAPI';
 import { round } from '~/helpers';
+import { fetchExchangeRates } from './exchangeAPI';
 
 export interface ConverterState {
   exchange: {

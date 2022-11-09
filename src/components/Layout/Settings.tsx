@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { Heading } from 'theme-ui';
 import { useAppSelector } from '~/hooks';
 
-import { CurrencyOverride } from './CurrencyOverride';
+import { CurrencyOverride } from '../Settings/CurrencyOverride';
 
 export const Settings = memo(() => {
   const open = useAppSelector((state) => state.converter.settings.open);

@@ -1,7 +1,7 @@
 import { ThemeProvider } from 'theme-ui';
 import { Provider } from 'react-redux';
 
-import theme from '~/theme';
+import theme from '~/const/theme';
 import store from '~/app/store';
 
 export default function App({ Component, pageProps }) {

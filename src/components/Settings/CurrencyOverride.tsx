@@ -1,10 +1,9 @@
 /** @jsxImportSource theme-ui */
-import { memo, useCallback, useMemo } from 'react';
-import { Flex, Grid, Heading, Input, Switch } from 'theme-ui';
+import { memo, useCallback } from 'react';
+import { Flex, Input, Switch } from 'theme-ui';
 import { SwapHoriz } from 'emotion-icons/material';
 
 import { useAppDispatch, useAppSelector } from '~/hooks';
-import { debounce } from '~/helpers';
 import { toggleCurrencyRateOverride, updateCurrencyRateOverride } from '~/app/slice';
 
 export const CurrencyOverride = memo(() => {
@@ -13,8 +12,6 @@ export const CurrencyOverride = memo(() => {
   const { base, converted } = useAppSelector((state) => state.converter.exchange);
   const override = useAppSelector((state) => state.converter.override);
   const rates = useAppSelector((state) => state.converter.rates);
-
-  const hasOverride = override[base.currency] != null;
 
   const handleOverrideToggle = useCallback(() => {
     dispatch(toggleCurrencyRateOverride());
